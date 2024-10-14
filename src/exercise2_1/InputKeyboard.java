@@ -94,6 +94,83 @@ public class InputKeyboard {
 		return value;
 		
 	}
+	
+	// Methods for Custom exceptions
+	public static char readChar(String message) {
+		boolean isValid = false;
+		char value = ' ';
+		
+		while(!isValid) {
+			System.out.print(message);
+			String scannerValue = scanner.next().trim();
+			
+			if (scannerValue.length() == 1) {
+				isValid = true;
+				value = scannerValue.charAt(0);
+			} else { 
+				System.out.println("Error de formato. Introduzca un solo caracter.");
+				
+			}	
+		
+		}
+		
+		return value;
+		
+	}
+	
+	public static String readString(String message) {
+		boolean isValid = false;
+		String value = "";
+		
+		while(!isValid) {
+			System.out.print(message);
+			String scannerValue = scanner.next();
+			
+			if (scannerValue.length() > 1) {
+				isValid = true;
+				value = scannerValue;
+				
+			} else { 
+				System.out.println("Error de formato. Introduzca una cadena de caracteres.");
+				
+			}	
+		
+		}
+		
+		return value;
+		
+	}
+	
+	
+	public static boolean readBoolean(String message) {
+		boolean isValid = false;
+		boolean value = false;
+		
+		while(!isValid) {
+			System.out.print(message);
+			String scannerValue = scanner.next().trim();
+			
+			if (scannerValue.length() == 1) {
+				if (scannerValue.equalsIgnoreCase("s")) {
+					isValid = true;
+					value = true;
+				} else if (scannerValue.equalsIgnoreCase("n")) {
+					isValid = true;
+					value = false;
+				}
+				
+			} else { 
+				System.out.println("Error de formato. Introduzca un solo caracter (s/n).");
+				
+			}	
+		
+		}
+		
+		return value;
+		
+	}
+	
+	
 
 	
 

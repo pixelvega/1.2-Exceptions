@@ -16,6 +16,17 @@ public class Main {
 	    
 	    double doubleValue = InputKeyboard.readDouble("Introduce un número decimal: ");
 	    System.out.println("Byte ingresado: " + doubleValue);
+	    
+	 // Custom exceptions
+	    char charValue = InputKeyboard.readChar("Introduce un caracter:");
+	    System.out.println("Char ingresado: " + charValue);
+	    
+	    String stringValue = InputKeyboard.readString("Introduce una cadena de caracteres:");
+	    System.out.println("String ingresado: " + stringValue);
+	    
+	    boolean booleanValue = InputKeyboard.readBoolean("Introduce s/n: ");
+	    System.out.println("Valor ingresado: " + booleanValue);
+	    
 
 	}
 
