@@ -11,5 +11,27 @@ public class Cinema {
 		this.cinemaManager = new CinemaManager(this);
 		
 	}
+
+	// getters and setters
+	public int getRows() {
+		return rows;
+	}
+
+	public void setRows(int rows) {
+		this.rows = rows;
+	}
+
+	public int getSeatsPerRow() {
+		return seatsPerRow;
+	}
+
+	public void setSeatsPerRow(int seatsPerRow) {
+		this.seatsPerRow = seatsPerRow;
+	}
+	
+	// Method to init the cinema manager
+	public void start() {
+		cinemaManager.displayMenu();
+	}
 	
 }

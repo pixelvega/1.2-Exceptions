@@ -1,5 +1,8 @@
 package exercise3_1;
 
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
 public class CinemaManager {
 	private Cinema cinema;
 	
@@ -10,7 +13,37 @@ public class CinemaManager {
 	public void displayMenu() {
 		// TODO Mostrarà les opcions del menú principal a l’usuari/ària, 
 		// li demanarà el número de l’opció escollida i el retornarà.
+		String[] options = {
+				"Mostrar butacas",
+				"Mostrar butacas por persona",
+				"Reservar butaca", 
+				"Anular reserva", 
+				"Anular reserva por persona", 
+				"Introducir persona",
+				"Introducir fila",
+				"Introducir asiento"
+		};
+		System.out.print("MENU: \n");
+		for (int i = 0; i < options.length; i++  ) {
+			System.out.println((i+1)+".Option " + options[i]);
+		}
 		
+		Scanner scanner = new Scanner(System.in);
+		System.out.println("Escoge la opción: ");
+		try {
+			int selectedOption =  scanner.nextInt();
+			if (selectedOption > 0 && selectedOption < 5) {
+				System.out.println("La opción escogida es: " + selectedOption);
+			} else {
+				System.out.println("Error: La opción debe ser un número entre 1 y 5");
+				displayMenu();
+			}
+		} catch (InputMismatchException e) {
+			System.out.println("Error: La opción debe ser un número entre 1 y 5");
+			displayMenu();
+		} finally{
+			scanner.close();
+		}
 	}
 	
 	private void displaySeats() {
