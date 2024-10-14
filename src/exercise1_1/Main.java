@@ -44,7 +44,6 @@ public class Main {
 		scanner.nextLine();
 		return new Product(name, price);
 	}
-	
 
   public static void main(String[] args) {
     Sale sale = new Sale();
@@ -63,8 +62,6 @@ public class Main {
     	
     }
     
-    scanner.close();
-    
     
     try {
       sale.calcTotal();
@@ -73,6 +70,20 @@ public class Main {
       System.out.println(e.getMessage());
       
     }
+    
+    System.out.println("Introduce un index si deseas ver un producto en particular de la compra: [1-" + sale.getProducts().size() +"]");
+    try {
+    	int index = scanner.nextInt();
+    	sale.getProductByIndex(index-1);
+    	
+    } catch(InputMismatchException e) {
+    	System.out.println("El valor introducido no es un número.");
+    	
+    } catch(IndexOutOfBoundsException e) {
+    	System.out.println("El índice introducido no representa ningún producto");
+    }
+    
+    scanner.close();
 
   }
 

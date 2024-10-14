@@ -52,5 +52,12 @@ public class Sale {
   public void addProduct(Product product) {
     products.add(product);
   }
+  
+  // Method to get a product by index
+  public void getProductByIndex(int index) throws IndexOutOfBoundsException {
+	  Product productByIndex = products.get(index);
+	  System.out.println("El artículo del index " + (index+1) + " es " + productByIndex.getName() + " y tiene un precio de " + productByIndex.getPrice() + "€.");
+	  
+  }
 
 }
