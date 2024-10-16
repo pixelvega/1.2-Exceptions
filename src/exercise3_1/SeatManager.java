@@ -2,6 +2,9 @@ package exercise3_1;
 
 import java.util.ArrayList;
 
+import exercise3_1.exceptions.SeatEmptyException;
+import exercise3_1.exceptions.SeatOccupiedException;
+
 public class SeatManager {
 	private ArrayList<Seat> seats ;
 	
@@ -13,28 +16,40 @@ public class SeatManager {
 		return seats;
 	}
 	
-	public void addSeat(Seat seat) {
-		// TODO 
-		// Si la fila i el seient de la butaca rebuda com a paràmetre 
-		// coincideixen amb el d’una butaca que ja es trobi a l’ArrayList (s’utilitzarà el mètode "cercarButaca"), 
-		// es llençarà l’excepció personalitzada "ExcepcioButacaOcupada".
+	public void addSeat(Seat seatToAdd) throws SeatOccupiedException {
+		boolean isSeatAbailable = searchSeat(seatToAdd.getRow(), seatToAdd.getSeat()) < 0;
+		
+		if(isSeatAbailable) {
+			seats.add(seatToAdd);
+		} else {
+			System.out.println("☠️ Error. Esta butaca no puede reservarse porque no ya está reservada. \n");
+
+		};
+		
 		
 	}
 	
-	public void deleteSeat(int row, int seat) {
-		// TODO
-		// Rebrà com a paràmetres el número de fila i el seient 
-		// i l’eliminarà de l’ArrayList. 
-		// Si la fila i el seient no coincideixen amb el d’una butaca reservada (s’utilitzarà el mètode "cercarButaca"), 
-		// llençarà una excepció personalitzada "ExcepcioButacaLliure".
+	public void deleteSeat(int rowToDelete, int seatToDelete) throws SeatEmptyException {
+		int indexOfSeat = searchSeat(rowToDelete, seatToDelete);
+		
+		if(indexOfSeat>=0) {
+			seats.remove(indexOfSeat);
+			
+		} else {
+			System.out.println("☠️ Error. Esta butaca no puede eliminarse porque no está reservada. \n");
+			
+		}
 	}
 	
-	public void searchSeat() {
-		// TODO
-		// Cerca a l’ArrayList de butaques, la butaca que  
-		// coincideixi amb les dades rebudes com a paràmetre (fila i seient). 
-		// Si la troba, retornarà la posició de la butaca a l’ArrayList 
-		// i, si no la troba, retornarà -1.
+	public int searchSeat(int rowToFind, int seatToFind) {
+		System.out.println("** search Seat");
+		for(int i=0; i < seats.size(); i++) {
+			Seat item = seats.get(i);
+			if(item.getRow() == rowToFind & item.getSeat() == seatToFind) {
+				return i;
+			}
+		}
+		return -1;
 	}
 
 }

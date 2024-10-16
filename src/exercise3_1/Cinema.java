@@ -3,14 +3,21 @@ package exercise3_1;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import exercise3_1.exceptions.NamePersonWrongException;
+import exercise3_1.exceptions.RowOutOfBoundsException;
+import exercise3_1.exceptions.SeatEmptyException;
+import exercise3_1.exceptions.SeatOccupiedException;
+import exercise3_1.exceptions.SeatOutOfBoundsException;
+
 public class Cinema {
-	private int rows; // Número de filas del cine.
-	private int seatsPerRow; // Número de asientos por cada fila.
-	SeatManager seatManager;
-	CinemaManager cinemaManager;
+	private static Scanner scanner = new Scanner(System.in);
+	private int rows; 
+	private int seatsPerRow;
+	private SeatManager seatManager;
+	private CinemaManager cinemaManager;
 	
 	public Cinema() {
-		this.seatManager = new SeatManager();
+		this.setSeatManager(new SeatManager());
 		this.cinemaManager = new CinemaManager(this);
 		
 	}
@@ -33,30 +40,40 @@ public class Cinema {
 	}
 	
 	public void configureCinema() {
-		@SuppressWarnings("resource")
-		Scanner scanner = new Scanner(System.in);
+		
 		boolean isCinemaConfigured = false;
 		
+		int configuredRows;
+		
 		while (!isCinemaConfigured) {
+
 			try {
 				System.out.print("¿Cuántas filas tiene el cine?");
-				setRows(scanner.nextInt());
+				configuredRows = scanner.nextInt();
+				setRows(configuredRows);				
 				System.out.print("¿Cuántas butacas por fila tiene?");
 				setSeatsPerRow(scanner.nextInt());
 				isCinemaConfigured = true;
 				
 			} catch (InputMismatchException e) {
-				System.out.println(e.getMessage());
+				System.out.println("☠️ Error, debes introducir un número. \n");
+				scanner.nextLine();
 			}
-		} 
+			
+		} ;
+		
+	}
+	
+	public SeatManager getSeatManager() {
+		return seatManager;
+	}
+
+	public void setSeatManager(SeatManager seatManager) {
+		this.seatManager = seatManager;
 	}
 	
 	// Method to init the cinema manager
-	public void start() {
-		// TODO L’aplicació un cop s’hagi iniciat, 
-		// preguntarà a l’usuari/ària quantes files 
-		// i quants seients per fila té la sala de cinema.
-		
+	public void start() throws RowOutOfBoundsException, SeatOutOfBoundsException, NamePersonWrongException, SeatEmptyException, SeatOccupiedException {
 		configureCinema();
 		cinemaManager.displayMenu();
 	}
